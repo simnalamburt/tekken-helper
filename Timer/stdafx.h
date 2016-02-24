@@ -1,6 +1,6 @@
 #pragma once
 
-#pragma region windows 헤더
+#pragma region Windows headers
 #include "targetver.h"
 #define WIN32_LEAN_AND_MEAN
 #define NOMINMAX

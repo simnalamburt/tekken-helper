@@ -6,7 +6,7 @@ std::string ErrorReporter::PublicStorage;
 void ErrorReporter::Report()
 {
     std::string text;
-#pragma region text 초기화
+#pragma region Initialize text variable
     char itoaBuffer[12];
     if ( filename ) {
         text += filename;
@@ -40,7 +40,7 @@ void ErrorReporter::Report()
     }
 #pragma endregion
 
-#pragma region 에러 표시
+#pragma region Display error
 	if ( IsDebuggerPresent() ) {
 		OutputDebugStringA ( "======================================"
             "========================================\n" );
