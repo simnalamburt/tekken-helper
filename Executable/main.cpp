@@ -50,11 +50,11 @@ inline void rising_upper ( Direction dir )
 void main()
 {
     for ( ;; ::Sleep(period) ) {
-        // ¹İÈ¯°ª ¼³¸í
-        // 0 : Å°°¡ ´­·ÁÁøÀûÀÌ ¾øÀ½
-        // 1 : Å°°¡ ´­·ÁÁ³¾úÀ¸³ª, ³õÃÆÀ½
-        // 0xffff8001 : Å°°¡ »õ·Ó°Ô ´­·ÁÁ³À½
-        // 0xffff8000 : Å°°¡ °è¼Ó ´­·ÁÁ®ÀÖ´Â »óÅÂÀÓ
+        // ë°˜í™˜ê°’ ì„¤ëª…
+        // 0 : í‚¤ê°€ ëˆŒë ¤ì§„ì ì´ ì—†ìŒ
+        // 1 : í‚¤ê°€ ëˆŒë ¤ì¡Œì—ˆìœ¼ë‚˜, ë†“ì³¤ìŒ
+        // 0xffff8001 : í‚¤ê°€ ìƒˆë¡­ê²Œ ëˆŒë ¤ì¡ŒìŒ
+        // 0xffff8000 : í‚¤ê°€ ê³„ì† ëˆŒë ¤ì ¸ìˆëŠ” ìƒíƒœì„
         DWORD upper_right_down = 0x1 & ::GetAsyncKeyState(upper_right);
         DWORD upper_left_down = 0x1 & ::GetAsyncKeyState(upper_left);
         DWORD bottom_currently_down = 0x8001 & ::GetAsyncKeyState(bottom);

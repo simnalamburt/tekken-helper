@@ -1,7 +1,7 @@
 #pragma once
 
 // ----------------------------------------------------------------------------------
-#pragma region __WARNING__, __ERROR__ ¡§¿«
+#pragma region __WARNING__, __ERROR__ Ï†ïÏùò
 // stringised version of line number (must be done in two steps)
 #define STRINGISE(N) #N
 #define EXPAND_THEN_STRINGISE(N) STRINGISE(N)
@@ -19,7 +19,7 @@
 // ----------------------------------------------------------------------------------
 #include "ErrorReporter.h"
 
-#pragma region HR_THROW_MSG, HR_THROW ¡§¿«
+#pragma region HR_THROW_MSG, HR_THROW Ï†ïÏùò
 #define HR_THROW_MSG(x, msg) \
 do { \
     HRESULT __hresult = (x); \
@@ -29,7 +29,7 @@ do { \
 #define HR_THROW(x) HR_THROW_MSG(x, nullptr)
 #pragma endregion
 
-#pragma region FALSE_THROW_MSG, FALSE_THROW ¡§¿«
+#pragma region FALSE_THROW_MSG, FALSE_THROW Ï†ïÏùò
 #define FALSE_THROW_MSG(x, msg) \
 do { \
     if( !(x) ) throw ErrorReporter( __FILE__, __LINE__, __FUNCTION__, #x, E_FAIL, msg ); \
@@ -38,7 +38,7 @@ do { \
 #define FALSE_THROW(x) FALSE_THROW_MSG(x, nullptr)
 #pragma endregion
 
-#pragma region NONZERO_THROW_MSG, NONZERO_THROW ¡§¿«
+#pragma region NONZERO_THROW_MSG, NONZERO_THROW Ï†ïÏùò
 #define NONZERO_THROW_MSG(x, msg) \
 do { \
     if( x ) throw ErrorReporter( __FILE__, __LINE__, __FUNCTION__, #x, E_FAIL, msg ); \

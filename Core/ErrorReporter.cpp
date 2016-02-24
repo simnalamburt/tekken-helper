@@ -6,7 +6,7 @@ std::string ErrorReporter::PublicStorage;
 void ErrorReporter::Report()
 {
     std::string text;
-#pragma region text ÃÊ±âÈ­
+#pragma region text ì´ˆê¸°í™”
     char itoaBuffer[12];
     if ( filename ) {
         text += filename;
@@ -19,17 +19,17 @@ void ErrorReporter::Report()
         text += '\n';
     }
     if ( function ) {
-        text += "ÇÔ¼ö ÀÌ¸§ : ";
+        text += "í•¨ìˆ˜ ì´ë¦„ : ";
         text += function;
         text += '\n';
     }
     if ( command ) {
-        text += "¿¡·¯ ¹®Àå : ";
+        text += "ì—ëŸ¬ ë¬¸ì¥ : ";
         text += command;
         text += '\n';
     }
     if ( 0xffffffff != hr ) {
-        text += "HRESULT ÄÚµå : 0x";
+        text += "HRESULT ì½”ë“œ : 0x";
         _itoa_s( hr, itoaBuffer, 16 );
         text += itoaBuffer;
         text += '\n';
@@ -40,7 +40,7 @@ void ErrorReporter::Report()
     }
 #pragma endregion
 
-#pragma region ¿¡·¯ Ç¥½Ã
+#pragma region ì—ëŸ¬ í‘œì‹œ
 	if ( IsDebuggerPresent() ) {
 		OutputDebugStringA ( "======================================"
             "========================================\n" );

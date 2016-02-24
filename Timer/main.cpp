@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 // ----------------------------------------------------------------------------------
-// Àü¿ª»ó¼ö
+// ì „ì—­ìƒìˆ˜
 namespace constant {
     static const TCHAR Title[] = _T("Hello");
     static const UINT Width = 800U;
@@ -37,14 +37,14 @@ try {
     e.Report();
     ExitProcess(EXIT_FAILURE);
 } catch ( std::exception& e ) {
-    std::string text ( "ÇÁ·Î±×·¥ ½ÇÇàÁß Ç¥ÁØ¿¹¿Ü°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù ( " );
+    std::string text ( "í”„ë¡œê·¸ë¨ ì‹¤í–‰ì¤‘ í‘œì¤€ì˜ˆì™¸ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤ ( " );
 	text.append ( typeid(e).name() );
-	text.append ( " )\n ¡á " );
+	text.append ( " )\n â–  " );
 	text.append ( e.what() );
     ErrorReporter ( text.c_str() ).Report();
     ExitProcess(EXIT_FAILURE);
 } catch ( ... ) {
-    ErrorReporter ( "ÇÁ·Î±×·¥ ½ÇÇàÁß ¹ÌÃ³¸®¿¹¿Ü°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù." ).Report();
+    ErrorReporter ( "í”„ë¡œê·¸ë¨ ì‹¤í–‰ì¤‘ ë¯¸ì²˜ë¦¬ì˜ˆì™¸ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤." ).Report();
     ExitProcess(EXIT_FAILURE);
 }
 
@@ -57,10 +57,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 
     switch ( msg ) {
     case WM_KEYDOWN:
-        text += _T('¡Ü');
+        text += _T('â—');
         goto APPEND_TEXT;
     case WM_KEYUP:
-        text += _T('¡Û');
+        text += _T('â—‹');
         APPEND_TEXT:
         text += static_cast<wchar_t>(wParam);
         text += _T(" (");
@@ -88,7 +88,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     return ::DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-// hWnd ÃÊ±âÈ­ ÆíÀÇÇÔ¼ö
+// hWnd ì´ˆê¸°í™” í¸ì˜í•¨ìˆ˜
 HWND initWin(HINSTANCE hInstance, int nCmdShow) {
     WNDCLASSEX window = {};
     window.cbSize = sizeof( WNDCLASSEX );
