@@ -1,4 +1,7 @@
-#include "stdafx.h"
+#include <SDKDDKVer.h>
+#define WIN32_LEAN_AND_MEAN
+#define NOMINMAX
+#include <Windows.h>
 
 const char _LP = 'Q';
 const char _RP = 'W';
@@ -47,7 +50,7 @@ inline void rising_upper ( Direction dir )
     ::Sleep(period);
 }
 
-void main()
+int main()
 {
     for ( ;; ::Sleep(period) ) {
         // 반환값 설명

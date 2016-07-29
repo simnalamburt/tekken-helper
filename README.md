@@ -5,9 +5,8 @@ TekkenHelper
 ![](https://attachment.namu.wiki/%ED%92%8D%EC%8B%A0%EA%B6%8C__385362.jpg)
 
 ```bash
-./Debug/Executable.exe
-# or
-./Release/Executable.exe
+make
+./a
 ```
 
 프로그램을 켠 채로 <kbd>y</kbd>나 <kbd>r</kbd>를 누르면 자동으로 `hghw`, `fgfw`
