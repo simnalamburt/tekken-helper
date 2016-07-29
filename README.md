@@ -2,7 +2,7 @@ TekkenHelper
 ========
 > 2012.4.18 ~ 2012.4.19
 
-![](https://attachment.namu.wiki/%ED%92%8D%EC%8B%A0%EA%B6%8C__385362.jpg)
+![](https://live3.namuwikiusercontent.com/cd/cda68fcc1c1636ce2b15536cfdad6cb66a4c76d722ce5bc5e00ca421f4065faf.jpg)
 
 ```bash
 make
