@@ -1,4 +1,4 @@
-TekkenHelper
+tekken-helper
 ========
 > 2012.4.18 ~ 2012.4.19
 
