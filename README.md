@@ -2,7 +2,7 @@ tekken-helper
 ========
 > 2012.4.18 ~ 2012.4.19
 
-![](https://live3.namuwikiusercontent.com/cd/cda68fcc1c1636ce2b15536cfdad6cb66a4c76d722ce5bc5e00ca421f4065faf.jpg)
+![](https://raw.githubusercontent.com/simnalamburt/i/master/tekken-helper/image.jpg)
 
 ```bash
 x86_64-w64-mingw32-gcc main.c
