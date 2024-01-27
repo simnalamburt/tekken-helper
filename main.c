@@ -64,7 +64,7 @@ static void rising_upper(bool is1P) {
 }
 
 int main(void) {
-  while (1) {
+  while (true) {
     // TODO: Should not rely on LSB of GetAsyncKeyState
     //
     // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getasynckeystate
