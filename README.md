@@ -10,8 +10,8 @@ tekken-helper
 ![Kazuya hitting Paul with EWGF](https://i.hyeon.me/tekken-helper/image.jpg)
 
 ```bash
-x86_64-w64-mingw32-gcc -Wpedantic -Os -s main.c
-./a.exe
+zig build-exe main.zig -O ReleaseSmall -fstrip -fsingle-threaded -target x86_64-windows
+./main.exe
 ```
 
 &nbsp;
