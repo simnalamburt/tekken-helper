@@ -1,0 +1,16 @@
+on: [push, pull_request]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: 0.11.0
+      - run: |
+          # Check formatting
+          zig fmt --check .
+
+          # Build
+          zig build-exe main.zig -O ReleaseSmall -fstrip -fsingle-threaded -target x86_64-windows
