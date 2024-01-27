@@ -17,14 +17,14 @@ extern "user32" fn keybd_event(bVk: w.BYTE, bScan: w.BYTE, dwFlags: w.DWORD, dwE
 //
 // Constants
 //
-const LP = 'Q';
-const RP = 'W';
-const left = 'F';
-const right = 'H';
-const up = 'T';
-const down = 'G';
-const upper_right = 'Y';
-const upper_left = 'R';
+const LP = 'U';
+const RP = 'I';
+const left = 'A';
+const right = 'D';
+const up = 'W';
+const down = 'S';
+const upper_right = 'E';
+const upper_left = 'Q';
 
 // Press, synthesize press key event
 fn p(key: u8) void {
