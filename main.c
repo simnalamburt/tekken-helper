@@ -1,69 +1,84 @@
 #include <stdbool.h>
-#include <SDKDDKVer.h>
-#define WIN32_LEAN_AND_MEAN
-#define NOMINMAX
-#include <Windows.h>
 
-const char _LP = 'Q';
-const char _RP = 'W';
+//
+// FFI
+//
+typedef unsigned char BYTE;
+typedef short SHORT;
+typedef unsigned long DWORD;
+typedef unsigned long *ULONG_PTR;
 
-const char left = 'F';
-const char right = 'H';
-const char up = 'T';
-const char bottom = 'G';
+extern void __stdcall Sleep(DWORD);
+extern SHORT __stdcall GetAsyncKeyState(int);
+extern void __stdcall keybd_event(BYTE, BYTE, DWORD, ULONG_PTR);
 
-const char upper_right = 'Y';
-const char upper_left = 'R';
+#define KEYEVENTF_EXTENDEDKEY 0x0001
+#define KEYEVENTF_KEYUP 0x0002
 
-const DWORD period = 17;
+//
+// constants
+//
+static const char _LP = 'Q';
+static const char _RP = 'W';
 
-enum Direction { LEFT, RIGHT };
+static const char left = 'F';
+static const char right = 'H';
+static const char up = 'T';
+static const char bottom = 'G';
+static const char upper_right = 'Y';
+static const char upper_left = 'R';
 
-void keydown(char key) {
+// keydown, synthesize press key event
+static void d(char key) {
   keybd_event(key, 0x45, KEYEVENTF_EXTENDEDKEY, 0);
 }
 
-void keyup(char key) {
+// keyup, synthesize release key event
+static void u(char key) {
   keybd_event(key, 0x45, KEYEVENTF_EXTENDEDKEY | KEYEVENTF_KEYUP, 0);
 }
 
-void double_upper(void) {
-  keyup(bottom); Sleep(period);
-  keydown(_LP); Sleep(period); keyup(_LP); Sleep(period);
-  keydown(_RP); Sleep(period); keyup(_RP); Sleep(period);
+// Skip 1 frame
+static void f() {
+  Sleep(17);
 }
 
-void rising_upper(enum Direction dir) {
-  const char front = dir == LEFT ? left : right;
-  const char back = dir == RIGHT ? left : right;
+static void double_upper(void) {
+  u(bottom); f();
+  d(_LP); f(); u(_LP); f();
+  d(_RP); f(); u(_RP); f();
+}
+
+static void rising_upper(bool is1P) {
+  const char front = is1P ? right : left;
+  const char back = is1P ? left : right;
   bool delay = false;
 
-  if (0x8001 & GetAsyncKeyState(back) ) keyup(back), delay = true;
-  if (0x8001 & GetAsyncKeyState(front) ) keyup(front), delay = true;
-  if (delay) Sleep(period);
+  if (0x8001 & GetAsyncKeyState(back) ) { u(back); delay = true; }
+  if (0x8001 & GetAsyncKeyState(front) ) { u(front); delay = true; }
+  if (delay) { f(); }
 
-  keydown(front); Sleep(period); keyup(front); Sleep(period);
-  keydown(bottom); Sleep(period); keydown(front); keydown(_RP); Sleep(period); keyup(bottom); keyup(front); keyup(_RP);
-  Sleep(period);
+  d(front); f(); u(front); f();
+  d(bottom); f(); d(front); d(_RP); f(); u(bottom); u(front); u(_RP);
+  f();
 }
 
 int main(void) {
   while (1) {
-    // 반환값 설명
-    // 0 : 키가 눌려진적이 없음
-    // 1 : 키가 눌려졌었으나, 놓쳤음
-    // 0xffff8001 : 키가 새롭게 눌려졌음
-    // 0xffff8000 : 키가 계속 눌려져있는 상태임
-    DWORD upper_right_down = 0x1 & GetAsyncKeyState(upper_right);
-    DWORD upper_left_down = 0x1 & GetAsyncKeyState(upper_left);
-    DWORD bottom_currently_down = 0x8001 & GetAsyncKeyState(bottom);
+    // TODO: Should not rely on LSB of GetAsyncKeyState
+    //
+    // Reference: https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getasynckeystate
+    SHORT upper_right_down = 0x1 & GetAsyncKeyState(upper_right);
+    SHORT upper_left_down = 0x1 & GetAsyncKeyState(upper_left);
+    SHORT bottom_currently_down = 0x8001 & GetAsyncKeyState(bottom);
 
-    if (bottom_currently_down) {
-      if (upper_left_down || upper_right_down) { double_upper(); }
-    } else {
-      if (upper_right_down) { rising_upper(RIGHT); }
-      else if (upper_left_down) { rising_upper(LEFT); }
+    if (bottom_currently_down && (upper_left_down || upper_right_down)) {
+      double_upper();
+    } else if (upper_right_down) {
+      rising_upper(true);
+    } else if (upper_left_down) {
+      rising_upper(false);
     }
-    Sleep(period);
+    f();
   }
 }
